@@ -27,9 +27,6 @@ def loadTexture(filename):
     return textureID
 
 
-
-
-
 class Window(pyglet.window.Window):
 
    # Cube 3D start rotation
@@ -55,7 +52,14 @@ class Window(pyglet.window.Window):
        self.textureList.append(loadTexture("aula.png"))
        self.textureList.append(loadTexture("ctim.png"))
        self.textureList.append(loadTexture("road.png"))
-       self.textureList.append(loadTexture("roof.png"))
+       self.textureList.append(loadTexture("res/labdoping-side.jpg"))
+       self.textureList.append(loadTexture("res/pnl-front-all.jpg"))    
+       self.textureList.append(loadTexture("res/geodesi-front.jpg"))            #harusnya plano
+       self.textureList.append(loadTexture("res/lingkungan-front-tile.jpg"))    #harusnya plano
+       self.textureList.append(loadTexture("res/arsi-side.jpg"))                #harusnya plano
+       self.textureList.append(loadTexture("res/aula-side-tile.jpg"))           #harusnya kkp
+       self.textureList.append(loadTexture("res/perpus-front-all.jpg"))           #harusnya kkp
+
        self.repeatFactor = 0.0
        self.currentBuilding = 1
 
@@ -64,20 +68,37 @@ class Window(pyglet.window.Window):
     print self.currentBuilding
 
    def texture_config(self):
-       if (self.currentBuilding < 5):
+       if (self.currentBuilding < 5):                           #bangunan depan sekitar alabar altim
         glBindTexture(GL_TEXTURE_2D, self.textureList[0])
+        self.repeatFactor = 5
        elif (self.currentBuilding == 7):
         glBindTexture(GL_TEXTURE_2D, self.textureList[3])
+        self.repeatFactor = 10
        elif ((self.currentBuilding== 6) or (self.currentBuilding == 5)):
         glBindTexture(GL_TEXTURE_2D, self.textureList[1])
+       elif (self.currentBuilding==5):
+        glBindTexture(GL_TEXTURE_2D, self.textureList[3])
+       elif (self.currentBuilding==8 or self.currentBuilding==9):                         #planologi
+        glBindTexture(GL_TEXTURE_2D, self.textureList[3])
+        self.repeatFactor = 1
+       elif (self.currentBuilding==11):                                                    #t.lingkungan
+        glBindTexture(GL_TEXTURE_2D, self.textureList[7])
+        self.repeatFactor = 8
+       elif (self.currentBuilding==12 or self.currentBuilding==13):                                                    #arsi
+        glBindTexture(GL_TEXTURE_2D, self.textureList[8])
+        self.repeatFactor = 5
+       elif (self.currentBuilding==14):                                                    #arsi
+        glBindTexture(GL_TEXTURE_2D, self.textureList[7])
+        self.repeatFactor = 1
+       elif (self.currentBuilding>40):                                                    #arsi
+        glBindTexture(GL_TEXTURE_2D, self.textureList[9])
+        self.repeatFactor = 1
 
    def color_config(self):
        if (self.currentBuilding < 5):
         glColor3f(0.4, 0.4, 0.4);
-       else:
-        glColor3f(0.5, 0.5, 0.5);
-
-        
+       #if(self.currentBuilding == 50):
+       #  glColor3f(1, 0, 0);
 
    def on_mouse_motion(self,x,y,dx,dy):
        #self.xRotation += dx
@@ -117,9 +138,9 @@ class Window(pyglet.window.Window):
            self.texture_config()
            glBegin(GL_QUADS)
            self.color_config()
-           glTexCoord2f(5.0,1.0);
+           glTexCoord2f(self.repeatFactor,1.0);
            glVertex3i(int(startpoint[0]),int(startpoint[1]),0)
-           glTexCoord2f(5.0,0.0);
+           glTexCoord2f(self.repeatFactor , 0.0);
            glVertex3i(int(startpoint[0]),int(startpoint[1]),10)
            glTexCoord2f(0.0,0.0);
            glVertex3i(int(endpoint[0]),int(endpoint[1]),10)
@@ -216,11 +237,7 @@ class Window(pyglet.window.Window):
            self.yRotation -= SMOOTH_INC
        elif motion == key.RIGHT:
            self.yRotation += SMOOTH_INC
-       
-
-
-
-
+      
 
 Window(WINDOW, WINDOW, 'Polytron Zap 4G')
 pyglet.app.run()

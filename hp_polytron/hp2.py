@@ -1,4 +1,5 @@
 import pyglet
+import OpenGL
 from pyglet.gl import *
 from pyglet.window import key
 from OpenGL.GLUT import *
@@ -62,26 +63,6 @@ class Window(pyglet.window.Window):
        glVertex3f(40,110,-50)
        glTexCoord2f(0.0,1.0);
        glVertex3f(-50,110,-50)
-       
-     
-
- 
-
-         
-       #kanan
-       
-
-       # atas
-       # glVertex3f(40,-50,-50)
-       # glVertex3f(-50,-50,-50)
-       # glVertex3f(-50,-50,-42)
-       # glVertex3f(40,-50,-42)
-
-       #bawah
-       # glVertex3f(40,110,-50)
-       # glVertex3f(-50,110,-50)
-       # glVertex3f(-50,110,-42)
-       # glVertex3f(40,110,-42)
 
 
        glEnd()

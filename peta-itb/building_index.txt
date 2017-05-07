@@ -1,0 +1,20 @@
+daftar building index
+
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8. Planologi
+9. Geodesi
+10. T.Lingkungan
+11. Arsi
+12. KKP
+13. Plano
+15. Arsi
+16. Sipil
+
+
+building undone ambil yang atas, taruh di bawah building txt
