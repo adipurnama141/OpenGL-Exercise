@@ -54,7 +54,8 @@ class Window(pyglet.window.Window):
        self.textureList = []
        self.textureList.append(loadTexture("aula.png"))
        self.textureList.append(loadTexture("ctim.png"))
-       print self.textureList
+       self.textureList.append(loadTexture("road.png"))
+       self.textureList.append(loadTexture("roof.png"))
        self.repeatFactor = 0.0
        self.currentBuilding = 1
 
@@ -65,7 +66,9 @@ class Window(pyglet.window.Window):
    def texture_config(self):
        if (self.currentBuilding < 5):
         glBindTexture(GL_TEXTURE_2D, self.textureList[0])
-       else:
+       elif (self.currentBuilding == 7):
+        glBindTexture(GL_TEXTURE_2D, self.textureList[3])
+       elif ((self.currentBuilding== 6) or (self.currentBuilding == 5)):
         glBindTexture(GL_TEXTURE_2D, self.textureList[1])
 
    def color_config(self):
@@ -148,6 +151,21 @@ class Window(pyglet.window.Window):
            endpoint = list(content[i+1].split())
            self.next_building()
 
+
+       # glEnable(GL_TEXTURE_2D)
+       # glBindTexture(GL_TEXTURE_2D, self.textureList[2])
+       # glBegin(GL_QUADS)
+       # glColor3f(0.35, 0.35, 0.35);
+       # glTexCoord2f(200.0,200.0);
+       # glVertex3i(0,0,0)
+       # glTexCoord2f(200.0,0.0);
+       # glVertex3i(0,500,10)
+       # glTexCoord2f(0.0,0.0);
+       # glVertex3i(500,500,10)
+       # glTexCoord2f(0.0,200.0);
+       # glVertex3i(500,0,0)
+       # glEnd()
+       # glDisable(GL_TEXTURE_2D)
 
 
        glPopMatrix()
